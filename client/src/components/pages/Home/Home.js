@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import Footer from '../../components/Footer/Footer';
+import WhyComponent from '../../components/Why/WhyComponent';
 
 export default function Home(){
 
@@ -10,6 +11,7 @@ export default function Home(){
 
     return (
         <>
+            <WhyComponent />
             <Footer />
         </>
     )

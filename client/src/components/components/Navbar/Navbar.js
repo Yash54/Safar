@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from '../../assets/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
-    const [setNavbar] = useState(false);
+    const [navbar, setNavbar] = useState(false);
+
+    const [visible, setVisible] = useState(false);
+    const [city, setCity] = useState("");
+    const [to, setToDate] = useState("");
+    const [from, setFromDate] = useState("");
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
+    const history = useHistory();
 
     const showButton = () => {
         if (window.innerWidth <= 960) {
@@ -36,13 +42,34 @@ function Navbar() {
 
     window.addEventListener('scroll', changeBackground);
 
+    const handleChange = (e) => {
+        setCity(e.target.value);
+    }
+
+    const setTo = (to) => {
+        setToDate({ to });
+    }
+
+    const setFrom = (from) => {
+        setFromDate({ from });
+    }
+
+    const showModal = () => {
+        setVisible(true);
+    };
+
+    const hideModal = () => {
+        setVisible(false);
+    };
+
     return (
         <>
             <nav className='navbar active'>
                 <div className='navbar-container'>
                     <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                         Safar
-            <i className='fab fa-typo3' />
+                        &nbsp;
+            <i className='fa fa-road' />
                     </Link>
                     <div className='menu-icon' onClick={handleClick}>
                         <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -53,8 +80,7 @@ function Navbar() {
                                 Home
                             </Link>
                         </li>
-                        {
-                                <li className='nav-item'>
+                        <li className='nav-item'>
                                     <Link
                                         to='/'
                                         className='nav-links'
@@ -63,13 +89,13 @@ function Navbar() {
                                         Lend Your Car
                                     </Link>
                                 </li>
-                        }
                         
                         <li className='nav-item'>
                             <Link
-                                to='/'
                                 className='nav-links'
                                 onClick={() => {
+                                    closeMobileMenu();
+                                    showModal();
                                 }}
                             >
                                 Rent a Car
@@ -85,8 +111,7 @@ function Navbar() {
                             </Link>
                         </li>
 
-                        {
-                                <li>
+                        <li>
                                     <Link
                                         to='/'
                                         className='nav-links-mobile'
@@ -95,14 +120,8 @@ function Navbar() {
                                         Log In
                                     </Link>
                                 </li>
-
-                        }
                     </ul>
-                    {
-                            <>
-                                {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/" >LOG IN</Button>}
-                            </>
-                    }
+                    {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/" >LOG IN</Button>}
                 </div>
             </nav>
         </>

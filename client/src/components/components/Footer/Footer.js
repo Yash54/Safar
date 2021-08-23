@@ -35,7 +35,8 @@ function Footer() {
                     <div className='footer-logo'>
                         <Link to='/' className='social-logo'>
                             Safar
-                        <i className='fab fa-typo3' />
+                            &nbsp;
+                        <i className='fa fa-road' />
                         </Link>
                     </div>
                     <small className='website-rights'>Safar © 2021</small>

@@ -5,9 +5,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    bottom: 0;
-    position: fixed;
-    width: 100%;
   }
   
   .footer-subscription {
