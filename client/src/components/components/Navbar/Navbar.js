@@ -2,6 +2,36 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Button } from '../../assets/Button/Button';
 import { Link, useHistory } from 'react-router-dom';
 import './Navbar.css';
+import styled from "styled-components";
+import { GlobalState } from '../../context/index';
+
+const LoginButton = styled.button`
+    :root{
+        ---primary:#fff;
+    }
+
+    padding: 8px 20px;
+    font-size: 18px;
+    
+    background-color: transparent;
+    color: #fff;
+    padding: 8px 20px;
+    border: 1px solid var(--primary);
+    transition: all 0.3s ease-out;
+    
+    padding: 8px 20px;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+        transition: all 0.3s ease-out;
+        background: #fff;
+        color: #242424;
+        transition: 250ms;
+    }
+
+`;
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -16,6 +46,8 @@ function Navbar() {
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
     const history = useHistory();
+
+    const [user, dispatch] = useContext(GlobalState);
 
     const showButton = () => {
         if (window.innerWidth <= 960) {
@@ -62,6 +94,8 @@ function Navbar() {
         setVisible(false);
     };
 
+
+
     return (
         <>
             <nav className='navbar active'>
@@ -82,7 +116,7 @@ function Navbar() {
                         </li>
                         <li className='nav-item'>
                                     <Link
-                                        to='/'
+                                        to='/user/signin'
                                         className='nav-links'
                                         onClick={closeMobileMenu}
                                     >
@@ -92,6 +126,7 @@ function Navbar() {
                         
                         <li className='nav-item'>
                             <Link
+                                // to='/rent'
                                 className='nav-links'
                                 onClick={() => {
                                     closeMobileMenu();
@@ -113,15 +148,17 @@ function Navbar() {
 
                         <li>
                                     <Link
-                                        to='/'
+                                        to='/user/signin'
                                         className='nav-links-mobile'
                                         onClick={closeMobileMenu}
                                     >
                                         Log In
                                     </Link>
                                 </li>
+
+                        
                     </ul>
-                    {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/" >LOG IN</Button>}
+                    {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/user/signin" >LOG IN</Button>}
                 </div>
             </nav>
         </>

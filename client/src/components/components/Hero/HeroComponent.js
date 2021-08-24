@@ -181,7 +181,7 @@ class HeroComponent extends React.Component {
 	render() {
 		return (
 			<div className='hero-container'>
-				<video src='/videos/videoplayback (online-video-cutter.com).mp4' autoPlay loop muted />
+				<video src='/videos/Home_video.mp4' autoPlay loop muted />
 				<h1 className="typewrite" data-period="2000" data-type='[ "REDISCOVER JOY OF DRIVING!" ]'>
 					<span className="wrap"></span>
 				</h1>
