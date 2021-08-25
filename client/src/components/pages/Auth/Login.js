@@ -7,7 +7,7 @@ import {
     DisplayError
 } from "../../../styles/style";
 import { AccountContext } from "./context";
-// import axios from 'axios';
+import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 import { GlobalState } from '../../context/index';
 
@@ -103,41 +103,41 @@ export function Login(props) {
             return;
         }
         else {
-            //sendToServer();
+            sendToServer();
         }
         
     };
 
-    // const sendToServer = () => {
+    const sendToServer = () => {
         
-    //     const payload = {
-    //         email: userInfo.email,
-    //         password: userInfo.password,
-    //     };
+        const payload = {
+            email: userInfo.email,
+            password: userInfo.password,
+        };
         
-    //     axios.post("/user/createsession", payload).then((res) => {
-    //         if (res.status === 200) {
-    //             localStorage.setItem("user", JSON.stringify(res.data));
-    //             localStorage.setItem("UserEmail", JSON.stringify(userInfo.email));
-    //             dispatch({
-    //                 type: "LOGIN_SUCESS",
-    //                 payload: {
-    //                     email: userInfo.email,
-    //                 }
-    //             });
-    //             history.push("/");
-    //         }
-    //         else {
-    //             setErrorState({
-    //                 error: true,
-    //                 statement:"Please try again to signin"
-    //             })
-    //             history.push("/user/signin");
-    //         }
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    // }
+        axios.post("/user/createsession", payload).then((res) => {
+            if (res.status === 200) {
+                localStorage.setItem("user", JSON.stringify(res.data));
+                localStorage.setItem("UserEmail", JSON.stringify(userInfo.email));
+                dispatch({
+                    type: "LOGIN_SUCESS",
+                    payload: {
+                        email: userInfo.email,
+                    }
+                });
+                history.push("/");
+            }
+            else {
+                setErrorState({
+                    error: true,
+                    statement:"Please try again to signin"
+                })
+                history.push("/user/signin");
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
     useEffect(() => {
         inputRef.current.focus();
