@@ -4,11 +4,68 @@ const date = require("date-and-time");
 const user = require("../models/user");
 
 
-// const asyncForEach = async (array, callback) => {
-//     for (let index = 0; index < array.length; index++) {
-//       await callback(array[index], index, array);
-//     }
-// };
+const asyncForEach = async (array, callback) => {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
+    }
+};
+
+
+module.exports.addcar = function (req, res) {
+  try {
+    var count;
+    var carid;
+    var finalcity;
+    user.find({ email: req.email }, function (err, user) {
+      if (err || !user) {
+        return res.status(400).json({ message: "Server Error" });
+      }
+      finalcity = user[0].city;
+    });
+    console.log(finalcity);
+    const pattern = date.compile("YYYY-MM-DD");
+    var tod = date.format(new Date(req.body.to), pattern);
+    var fromd = date.format(new Date(req.body.from), pattern);
+    cars.find({}, function (err, results) {
+      count = results.length;
+      count = count + 1;
+      carid = "C" + count.toString();
+      const newcar = new cars({
+        carid: carid,
+        pictures: req.body.croppedImage,
+        registration_no: req.body.registration,
+        rent: req.body.rent,
+        deposite: req.body.deposit,
+        company: req.body.company,
+        modl: req.body.model,
+        category: req.body.category,
+        fuel_type: req.body.fuel,
+        no_of_passengers: req.body.seats,
+        color: req.body.color,
+        engine_type: req.body.eng,
+        features: req.body.features,
+        to_date: tod,
+        from_date: fromd,
+        city: finalcity,
+        lender_email: req.email,
+      });
+      console.log(newcar);
+      cars.create(newcar, function (err) {
+        if (err) {
+          console.log("Error in adding the car to database");
+          console.log(err);
+          return res.status(404).end();
+        } else {
+          console.log("Car successfully added to the database");
+          return res.status(200).end();
+        }
+      });
+    });
+  } catch (err) {
+    console.log("Error in catch block");
+    return res.status(404).json({ message: "Error in catch block" });
+  }
+};
 
 module.exports.filter = async(req, res)=> {
     try {
