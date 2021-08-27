@@ -227,14 +227,14 @@ class HeroComponent extends React.Component {
           			</Button>
 
 					{
-							<Button
-								className='btns'
-								buttonStyle='btn--primary'
-								buttonSize='btn--large'
-								link="/"
-							>
-								LEND YOUR CAR <i className='far fa-play-circle' />
-							</Button>
+						<Button
+							className='btns'
+							buttonStyle='btn--primary'
+							buttonSize='btn--large'
+							link="/user/lendcar"
+						>
+							LEND YOUR CAR <i className='far fa-play-circle' />
+						</Button>
 							
 					}
 				</div>

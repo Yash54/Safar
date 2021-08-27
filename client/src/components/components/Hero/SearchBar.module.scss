@@ -1,0 +1,136 @@
+@mixin tablet() {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @media screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin large() {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin primaryFont() {
+  font-family: "Yeseva One", cursive;
+}
+
+@mixin secondaryFont() {
+  font-family: "Roboto", sans-serif;
+}
+
+.mainContainer {
+  position: relative;
+}
+
+.cont {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: rgb(56, 51, 51);
+}
+
+.contWide {
+  @extend .cont;
+  @include tablet {
+    flex-direction: row;
+    justify-content: center;
+    // align-items: center;
+  }
+}
+
+.unitContStyle {
+  justify-items: center;
+}
+
+.unitContWide {
+  @include tablet {
+    width: 45%;
+  }
+}
+
+.label {
+  text-align: left;
+  height: 35%;
+  padding: 0 15px;
+}
+
+.label p {
+  margin: 0;
+  font-size: 14px;
+  color: rgb(75, 69, 69);
+}
+
+.dateTimeCont {
+  justify-content: space-between;
+  position: relative;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgb(75, 69, 69);
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+  height: 3rem;
+}
+
+.date p {
+  color: rgb(75, 69, 69);
+}
+
+.date {
+  width: 100%;
+  position: relative;
+}
+
+.cont > :last-child {
+  margin-top: 15px;
+}
+
+.contWide > :last-child {
+  @include tablet {
+    margin-top: 0;
+  }
+}
+.arrowCont {
+  display: none;
+  color: #4051b5;
+}
+
+.arrowContWide {
+  @extend .arrowCont;
+  @include tablet {
+    display: inline-block;
+    margin-top: 27px;
+  }
+}
+
+.calendar {
+  height: 100%;
+}
+
+.calendarCont {
+  position: absolute;
+  display: inline-block;
+  background-color: white;
+  border-radius: 5px;
+  left: 55px;
+  top: -5px;
+  margin: 0 auto;
+  z-index: -20;
+}
+
+.calendarContEnd {
+  @extend .calendarCont;
+}

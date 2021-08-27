@@ -94,8 +94,6 @@ function Navbar() {
         setVisible(false);
     };
 
-
-
     return (
         <>
             <nav className='navbar active'>
@@ -116,7 +114,7 @@ function Navbar() {
                         </li>
                         <li className='nav-item'>
                                     <Link
-                                        to='/user/signin'
+                                        to='/user/lendcar'
                                         className='nav-links'
                                         onClick={closeMobileMenu}
                                     >
@@ -126,7 +124,6 @@ function Navbar() {
                         
                         <li className='nav-item'>
                             <Link
-                                // to='/rent'
                                 className='nav-links'
                                 onClick={() => {
                                     closeMobileMenu();
@@ -147,16 +144,14 @@ function Navbar() {
                         </li>
 
                         <li>
-                                    <Link
-                                        to='/user/signin'
-                                        className='nav-links-mobile'
-                                        onClick={closeMobileMenu}
-                                    >
-                                        Log In
-                                    </Link>
-                                </li>
-
-                        
+                            <Link
+                                to='/user/signin'
+                                className='nav-links-mobile'
+                                onClick={closeMobileMenu}
+                            >
+                                Log In
+                            </Link>
+                        </li>
                     </ul>
                     {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/user/signin" >LOG IN</Button>}
                 </div>
