@@ -3,6 +3,7 @@ import '../../../App.css';
 import { Button } from './../../assets/Button/Button';
 import './HeroComponent.css';
 import $ from 'jquery';
+import AuthService from "../../../services/auth";
 
 class HeroComponent extends React.Component {
 
@@ -227,14 +228,25 @@ class HeroComponent extends React.Component {
           			</Button>
 
 					{
-						<Button
-							className='btns'
-							buttonStyle='btn--primary'
-							buttonSize='btn--large'
-							link="/user/lendcar"
-						>
-							LEND YOUR CAR <i className='far fa-play-circle' />
-						</Button>
+						!(AuthService.getCurrentUser() && AuthService.getCurrentUser().accessToken)
+							?
+							<Button
+								className='btns'
+								buttonStyle='btn--primary'
+								buttonSize='btn--large'
+								link="/user/signin"
+							>
+								LEND YOUR CAR <i className='far fa-play-circle' />
+							</Button>
+							:
+							<Button
+								className='btns'
+								buttonStyle='btn--primary'
+								buttonSize='btn--large'
+								link="/user/lendCar"
+							>
+								LEND YOUR CAR <i className='far fa-play-circle' />
+							</Button>
 							
 					}
 				</div>

@@ -108,6 +108,10 @@ export function Login(props) {
         
     };
 
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     const sendToServer = () => {
         
         const payload = {
@@ -126,6 +130,7 @@ export function Login(props) {
                     }
                 });
                 history.push("/");
+                refreshPage();
             }
             else {
                 setErrorState({
@@ -143,6 +148,8 @@ export function Login(props) {
         inputRef.current.focus();
         document.title = "Login into your account";
     },[])
+
+    
 
     return (
         <BoxContainer>

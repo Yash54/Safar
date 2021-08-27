@@ -9,7 +9,7 @@
   }
   
   .navbar.active{
-    background: linear-gradient(90deg, rgb(59, 59, 65) 0%, rgb(26, 23, 23) 100%);
+    background: linear-gradient(90deg, rgb(26, 23, 23) , rgb(59, 59, 65));
     position: sticky;
   }
   
@@ -42,10 +42,11 @@
     grid-gap: 10px;
     list-style: none;
     text-align: center;
-    width: 60vw;
+    width: 56vw;
     justify-content: end;
     margin-right: 2rem;
     margin-left: 4vw;
+    margin-top: 10px;
   }
   
   .nav-item {

@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button } from '../../assets/Button/Button';
 import { Link, useHistory } from 'react-router-dom';
+import AuthService from "../../../services/auth";
 import './Navbar.css';
 import styled from "styled-components";
 import { GlobalState } from '../../context/index';
+import { Dialog, DialogContent } from '@material-ui/core';
+import SearchBar from '../Hero/SearchBar';
+import { SubmitButton } from '../../../styles/style';
 
 const LoginButton = styled.button`
     :root{
@@ -94,8 +98,32 @@ function Navbar() {
         setVisible(false);
     };
 
+    function refreshPage() {
+    window.location.reload(false);
+  }
+    
+
     return (
         <>
+            <Dialog open={visible} aria-labelledby="form-dialog-title" fullWidth="true" maxWidth="xs" >
+                <DialogContent>
+                    <SearchBar
+                        onChange={handleChange}
+                        setTo={setTo}
+                        setFrom={setFrom}
+                    />
+                </DialogContent>
+                <div className="buttonContainer">
+                    <SubmitButton
+                        style={{ padding: "2%", marginRight: "5%" }}
+                    >
+                        Search for cars
+					</SubmitButton>
+                    <SubmitButton onClick={e => hideModal(e)} style={{ padding: "2%", marginLeft: "5%" }}>
+                        Cancel Search
+					</SubmitButton>
+                </div>
+            </Dialog>
             <nav className='navbar active'>
                 <div className='navbar-container'>
                     <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
@@ -112,7 +140,20 @@ function Navbar() {
                                 Home
                             </Link>
                         </li>
-                        <li className='nav-item'>
+                        {
+                            !(AuthService.getCurrentUser() && AuthService.getCurrentUser().accessToken)
+                                ?
+                                <li className='nav-item'>
+                                    <Link
+                                        to='/user/signin'
+                                        className='nav-links'
+                                        onClick={closeMobileMenu}
+                                    >
+                                        Lend Your Car
+                                    </Link>
+                                </li>
+                                :
+                                <li className='nav-item'>
                                     <Link
                                         to='/user/lendcar'
                                         className='nav-links'
@@ -121,6 +162,7 @@ function Navbar() {
                                         Lend Your Car
                                     </Link>
                                 </li>
+                        }
                         
                         <li className='nav-item'>
                             <Link
@@ -135,7 +177,7 @@ function Navbar() {
                         </li>
                         <li className='nav-item'>
                             <Link
-                                to='/'
+                                to='/aboutUs'
                                 className='nav-links'
                                 onClick={closeMobileMenu}
                             >
@@ -143,17 +185,70 @@ function Navbar() {
                             </Link>
                         </li>
 
-                        <li>
-                            <Link
-                                to='/user/signin'
-                                className='nav-links-mobile'
-                                onClick={closeMobileMenu}
-                            >
-                                Log In
-                            </Link>
-                        </li>
+                        {
+                            !(AuthService.getCurrentUser() && AuthService.getCurrentUser().accessToken)
+                                ?
+                                <li>
+                                    <Link
+                                        to='/user/signin'
+                                        className='nav-links-mobile'
+                                        onClick={closeMobileMenu}
+                                    >
+                                        Log In
+                                    </Link>
+                                </li>
+                                :
+                                <div>
+                                
+                                    <li
+                                        className='nav-links-mobile'
+                                        onClick={
+                                            () => {
+                                                closeMobileMenu();
+                                            }
+                                        }
+                                    >
+                                            My Profile
+
+                                        
+                                    </li>
+                                    
+                                    <li>
+                                        <Link
+                                            to='/'
+                                            className='nav-links-mobile'
+                                            onClick={() => {
+                                                AuthService.logout();
+                                                closeMobileMenu();
+                                            }}
+                                        >
+                                            Log Out
+                                        </Link>
+                                    </li>
+                                </div>
+
+                        }
                     </ul>
-                    {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/user/signin" >LOG IN</Button>}
+                    {
+                        !(AuthService.getCurrentUser() && AuthService.getCurrentUser().accessToken)
+                            ?
+                            <>
+                                {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/user/signin" >LOG IN</Button>}
+                            </>
+                            :
+                            <>
+                                {
+                                    button
+                                    &&
+                                    <>
+                                        <LoginButton onClick={() => {  }} ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;My Profile</LoginButton>
+                                        &nbsp; &nbsp;
+                                        <LoginButton onClick={() => { AuthService.logout() }}><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;LogOut</LoginButton>
+                                        
+                                    </>
+                                }
+                            </>
+                    }
                 </div>
             </nav>
         </>
