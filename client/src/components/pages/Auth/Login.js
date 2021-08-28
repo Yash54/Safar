@@ -53,7 +53,6 @@ export function Login(props) {
             ...prevState,
             [name]: value,
         }));
-        // console.log(userInfo.email, userInfo.password);
     };
 
     const validateForm = () => {
@@ -132,15 +131,13 @@ export function Login(props) {
                 history.push("/");
                 refreshPage();
             }
-            else {
-                setErrorState({
-                    error: true,
-                    statement:"Please try again to signin"
-                })
-                history.push("/user/signin");
-            }
         }).catch((err) => {
             console.log(err);
+            setErrorState({
+                error: true,
+                statement:"Please try again to signin"
+            })
+            history.push("/user/signin");
         });
     }
 

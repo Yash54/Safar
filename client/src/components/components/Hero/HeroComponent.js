@@ -3,7 +3,12 @@ import '../../../App.css';
 import { Button } from './../../assets/Button/Button';
 import './HeroComponent.css';
 import $ from 'jquery';
+import "./../LendACar/LendCar.css"
+import SearchBar from './SearchBar';
+import { SubmitButton } from '../../../styles/style';
 import AuthService from "../../../services/auth";
+import { Dialog, DialogContent } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 
 class HeroComponent extends React.Component {
 
@@ -177,6 +182,7 @@ class HeroComponent extends React.Component {
 		localStorage.setItem("location", JSON.stringify(payload));
 
 		this.props.history.push("/rent");
+
 	}
 
 	render() {
@@ -216,16 +222,41 @@ class HeroComponent extends React.Component {
 						<span className="nbr ltr">0</span>
 					</div>
 				</div>
+				<Dialog open={this.state.visible} aria-labelledby="form-dialog-title" fullWidth="true" maxWidth="xs" >
+					<DialogContent>
+						<SearchBar
+							onChange={this.handleChange}
+							setTo={this.setTo}
+							setFrom={this.setFrom}
+						/>
+					</DialogContent>
+					<div className="buttonContainer">
+						<SubmitButton
+							style={{ padding: "2%", marginRight: "5%" }}
+							onClick={(e) => {
+								console.log("hello");
+								this.sendToServer(e)
+							}}
+						>
+							Search for cars
+						</SubmitButton>
+						<SubmitButton onClick={e => this.hideModal(e)} style={{padding:"2%", marginLeft:"5%"}}>
+							Cancel Search
+						</SubmitButton>
+					</div>
+				</Dialog>
 
 				<div className='hero-btns'>
 					<Button
-						className='btns'
-						buttonStyle='btn--outline'
-						buttonSize='btn--large'
-						link="/"
-					>
-						RENT A CAR
-          			</Button>
+                        className='btns'
+                        buttonStyle='btn--outline'
+                        buttonSize='btn--large'
+
+                        // TODO : first redirect to link and then open the modal
+                        onClick={this.showModal}
+                    >
+                        RENT A CAR
+                	</Button>
 
 					{
 						!(AuthService.getCurrentUser() && AuthService.getCurrentUser().accessToken)
@@ -255,4 +286,4 @@ class HeroComponent extends React.Component {
 	}
 }
 
-export default (HeroComponent);
+export default withRouter(HeroComponent);

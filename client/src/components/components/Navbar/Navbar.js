@@ -100,8 +100,46 @@ function Navbar() {
 
     function refreshPage() {
     window.location.reload(false);
-  }
+    }
+    const sendToServer = (event) => {
+        event.preventDefault();
+
+        const payload = {
+            to: to.to,
+            from: from.from,
+            city: city,
+            categories: [],
+            brand: [],
+            fuel: [],
+            eng: [],
+            seats: [],
+            color: [],
+            email: "",
+        }
+
     
+        if (JSON.parse(localStorage.getItem("UserEmail")))
+            payload.email = JSON.parse(localStorage.getItem("UserEmail"));
+                
+
+        localStorage.setItem("location", JSON.stringify(payload));
+
+        console.log(payload);
+        console.log("Navbar----------------------------------");
+
+        dispatch({
+            type: "SEARCH_CAR",
+            payload: {
+                toDate: payload.to,
+                fromDate: payload.from,
+                rentCity: payload.city,
+            }
+        });
+
+        hideModal();
+        history.push("/rent");
+
+    }
 
     return (
         <>
@@ -116,6 +154,7 @@ function Navbar() {
                 <div className="buttonContainer">
                     <SubmitButton
                         style={{ padding: "2%", marginRight: "5%" }}
+                        onClick={(e) => sendToServer(e)}
                     >
                         Search for cars
 					</SubmitButton>
@@ -177,7 +216,7 @@ function Navbar() {
                         </li>
                         <li className='nav-item'>
                             <Link
-                                to='/aboutUs'
+                                to='/'
                                 className='nav-links'
                                 onClick={closeMobileMenu}
                             >
@@ -233,7 +272,7 @@ function Navbar() {
                         !(AuthService.getCurrentUser() && AuthService.getCurrentUser().accessToken)
                             ?
                             <>
-                                {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/user/signin" >LOG IN</Button>}
+                                {button && <Button buttonStyle='btn--outline' style={{ marginRight: '2.5vw' }} link="/user/signin" ><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;LOG IN</Button>}
                             </>
                             :
                             <>

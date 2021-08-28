@@ -1,0 +1,394 @@
+.Main {
+  width: 70%;
+  margin-top: 0;
+  margin-right: 3%;
+  margin-left: auto;
+  font-size: 16px;
+  background-color: rgb(255, 255, 255);
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.section-title {
+  margin-top: 30px;
+}
+
+.car-card {
+  width: calc(33% - 10px);
+  margin: 20px 0;
+}
+
+.card-design {
+  box-shadow: -1px 1px 16px 1px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: -1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: -1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+}
+
+.card-design:hover {
+  cursor: pointer;
+  width: 101%;
+  height: 100.87%;
+  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+}
+
+.hr-text {
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  opacity: 1;
+  background-color: #f2f2f2;
+  font-size: 1.5em;
+  width: 100%;
+}
+
+.hr-text:before {
+  content: "";
+  background: linear-gradient(to right, transparent, #000000, transparent);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  font-size: 1.5em;
+  background-color: #f2f2f2;
+}
+
+.hr-text:after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  color: black;
+  padding: 0.75em 0.5em;
+  font-size: 1.25em;
+  background-color: #f2f2f2;
+}
+
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-image-div {
+  width: 100%;
+  height: 65%;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill !important;
+}
+
+.lender-image {
+  border-radius: 100%;
+  padding: 0, 10px, 0, 0;
+  width: 40px;
+  height: 40px;
+  float: left;
+}
+
+.card-title {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.card-channel {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.cars-div {
+  width: 100%;
+}
+
+.modal-div {
+  background-color: #f2f2f2;
+  width: 100%;
+  height: 100%;
+  border-radius: 20%;
+}
+
+.close-div {
+  background-color: #f2f2f2;
+  margin-bottom: 0;
+  text-align: right;
+  /* box-shadow: -1px 6px 6px -4px rgba(0,0,0,1);
+  -webkit-box-shadow: -1px 6px 6px -4px rgba(0,0,0,1);
+  -moz-box-shadow: -1px 6px 6px -4px rgba(0,0,0,1); */
+  /* border-bottom: darkgrey ; */
+}
+
+.image-design {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.close-btn {
+  border-radius: 50%;
+  padding: 0;
+  border: 0;
+  margin: 1%;
+}
+
+.close-btn:hover {
+  cursor: pointer;
+}
+
+.car-profile-details-container {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+}
+
+.car-profile-details {
+  margin-bottom: 1.5%;
+  padding-left: 3.5%;
+  display: flex;
+}
+
+.car-image {
+  width: 100%;
+  height: 100%;
+  position: relative !important;
+  object-fit: fill;
+}
+
+.car-image-name {
+  text-align: center;
+}
+
+.general-instru {
+  padding: 1% 3.5%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.car-image-name-details {
+  width: 40%;
+  height: 100%;
+}
+
+.car-generals {
+  display: flex;
+  height: 15%;
+}
+
+.seats {
+  flex: 1;
+  text-align: center;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+}
+
+.engine {
+  flex: 1;
+  text-align: center;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+}
+
+.fuel {
+  flex: 1;
+  text-align: center;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+}
+
+.booking-details {
+  width: 60%;
+  height: 100%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.car-details-container {
+  background-color: #f2f2f2;
+  height: 90%;
+  overflow: auto;
+  margin-bottom: 5%;
+}
+
+.vertical {
+  margin-top: 1em;
+  height: 3vw;
+  width: 0;
+  border: 1px dotted rgb(99, 99, 99);
+}
+
+.journey-duration {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+  text-align: center;
+  width: fit-content;
+  height: 10%;
+  font-size: 20px;
+  color: dimgray;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.lender-details {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+
+.lender-name-profile {
+  font-size: 18px;
+}
+
+.lender-image-2 {
+  border-radius: 100%;
+  padding: 0, 10px, 0, 0;
+  width: 80px;
+  height: 80px;
+  float: left;
+}
+
+.left-panel {
+  width: 60%;
+  margin: 0.5%;
+  padding: 0 2%;
+}
+
+.right-panel {
+  width: 40%;
+  margin-top: 0.5%;
+  margin-right: 2.5%;
+  padding: 0 2%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.journey-row {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  font-size: 24px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.journey-from {
+  flex: 1;
+}
+
+.journey-to {
+  flex: 1;
+}
+
+.to-image {
+  flex: 1;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.instructions {
+  border-collapse: collapse;
+  margin: 2%;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.instructions thead tr {
+  background-color: #040e0c;
+  color: #ffffff;
+  text-align: left;
+}
+
+.instructions th,
+.instructions td {
+  padding: 12px 15px;
+}
+
+.instructions tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.instructions tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.instructions tbody tr:last-of-type {
+  border-bottom: 2px solid #070e0c;
+}
+
+.fare {
+  border-collapse: collapse;
+  margin: 2%;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.fare thead tr {
+  background-color: #040e0c;
+  color: #ffffff;
+  text-align: left;
+}
+
+.fare th,
+.fare td {
+  padding: 12px 15px;
+}
+
+.fare tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.fare tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.fare tbody tr:last-of-type {
+  border-bottom: 2px solid #070e0c;
+}
+
+.fare tbody tr:first-of-type {
+  border-top: 2px solid #070e0c;
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .Main {
+    max-width: 600px;
+  }
+  .car-card {
+    width: calc(50% - 22px);
+  }
+}
+
+/* Mobiles */
+@media (max-width: 640px) {
+  .Main {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  .car-card {
+    width: 100%;
+  }
+}

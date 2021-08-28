@@ -1,0 +1,52 @@
+.filters {
+  margin-left: 2%;
+  width: 23%;
+  padding: 2%;
+  background-color: rgb(255, 255, 255);
+}
+
+.check-design {
+  transform: scale(1.5);
+  margin: 4% 2% 4% 7%;
+}
+
+
+.hr-text2 {
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  opacity: 1;
+  font-size: 1.45em;
+  width: 100%;
+}
+
+.hr-text2:before {
+  content: "";
+  background: linear-gradient(to right, transparent, #000000, transparent);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  font-size: 1.45em;
+}
+
+.hr-text2:after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  color: black;
+  padding: 0.75em 0.5em;
+  font-size: 1.1em;
+  background-color: white;
+}
+
+.categories-filter,
+.brand-filter,
+.fuel-filter,
+.seats-filter,
+.engine-filter {
+  margin: 8% 1%;
+}
