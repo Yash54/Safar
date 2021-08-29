@@ -187,7 +187,6 @@ export function Signup(props) {
                     <select required className="dropdown-inputs" name="city" id="city-selection" style={{border:"1px solid #aaaaac", color:"#aaaaac"}} onChange={handleChange}>
                         <option disabled selected style={{color:"#aaaaac"}}>City</option>
                         <option value="Ahmedabad" style={{color:"#000"}}>Ahemadabad</option>
-                        <option value="Vadodara" style={{color:"#000"}}>Vadodara</option>
                         <option value="Gandhinagar" style={{color:"#000"}}>Gandhinagar</option>
                         <option value="Rajkot" style={{color:"#000"}}>Rajkot</option>
                         <option value="Surat" style={{color:"#000"}}>Surat</option>

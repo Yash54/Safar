@@ -182,7 +182,7 @@ class Filters extends React.Component {
                     <CheckBox labelFor="Crimson Red" className="color" onChange={this.eventHandler} values={false} />
                     <CheckBox labelFor="Silver" className="color" onChange={this.eventHandler} values={false} />
                     <CheckBox labelFor="White" className="color" onChange={this.eventHandler} values={false} />
-                    <CheckBox labelFor="Yellow" className="color" onChange={this.eventHandler} values={false} />
+                    <CheckBox labelFor="Blue" className="color" onChange={this.eventHandler} values={false} />
                     <CheckBox labelFor="Black" className="color" onChange={this.eventHandler} values={false} />
 
                 </div>

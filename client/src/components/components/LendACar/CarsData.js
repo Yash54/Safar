@@ -74,5 +74,5 @@ export const dummyCarData = [{
 
 export const fuel = ["Petrol","Diesel", "Petrol + CNG", "Diesel + CNG"];
 export const engine = ["Manual", "Auto"];
-export const colorz=["Crimson Red", "Silver", "White", "Yellow", "Black"];
+export const colorz=["Crimson Red", "Silver", "White", "Blue", "Black"];
 export const cityz = ["Ahmedabad", "Surat", "Rajkot", "Dahod", "Gandhinagar"];

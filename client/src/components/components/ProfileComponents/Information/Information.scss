@@ -1,0 +1,25 @@
+#info {
+  width: 25%;
+  img {
+    width: 230px;
+    height: 230px;
+  }
+  h1 {
+    .username {
+      color: #666;
+      font-size: 20px;
+      font-weight: 200;
+    }
+  }
+  div {
+    margin: 10px 0;
+  }
+  button {
+    width: 230px;
+    margin: 5px 0;
+    padding: 7px 0;
+    cursor: pointer;
+    background: #eff3f6;
+    border: 1px silver solid;
+  }
+}

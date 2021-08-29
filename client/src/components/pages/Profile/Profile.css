@@ -1,0 +1,22 @@
+#profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 3%;
+}
+
+@media (max-width: 1050px) {
+  #profile {
+    margin: 0 75px;
+  }
+}
+
+@media (max-width: 900px) {
+  #profile {
+    margin: 0 20px;
+  }
+  #profile #filter-repo {
+    width: 80%;
+  }
+}
+/*# sourceMappingURL=Profile.css.map */

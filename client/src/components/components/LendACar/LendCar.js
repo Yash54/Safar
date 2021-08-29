@@ -100,10 +100,6 @@ class LendCar extends React.Component {
 						this.state.category = models.category;
 						this.state.seats = models.seats;
 						this.setState({});
-						// this.setState({
-						// 	category: models.category,
-						// 	seats: models.seats
-						// }, () => { console.log("new state", this.state) });
 
 						console.log(this.state);
 						
@@ -212,6 +208,8 @@ class LendCar extends React.Component {
 			errorele.style.visibility = 'visible';
 		}
 	}
+
+	
 
 	sendToServer = (event) => {
 		event.preventDefault();
@@ -421,10 +419,6 @@ class LendCar extends React.Component {
 						<div style={{ width: "15%", margin: "8% auto 0.75% auto", textAlign: "center" }}>
 							<img src='/doublearrowside.png' width="25" height="25" alt="arrow" />
 						</div>
-						{/* <div className="toImage">
-							<svg xmlns="http://www.w3.org/2000/svg" width="40" height="30"><g fill="none"><g><g><g><g transform="translate(0 1)"><path stroke="#979797" d="M.5 15h40" stroke-linecap="square" /><circle cx="20" cy="16" r="13" fill="#9B9B9B" stroke="#F7F7F7" /><text fill="#fff" font-family="Helvetica" font-size="13" font-weight="bold"><tspan x="12" y="21">TO</tspan></text></g></g></g></g></g></svg>
-						</div> */}
-						{/* <div className="journeyTo"><input type="date" min={this.state.from} className="toDate" required onChange={e => this.setTo(e)} /></div> */}
 						<MuiPickersUtilsProvider utils={DateFnsUtils}>
 
 							<KeyboardDatePicker
@@ -441,8 +435,6 @@ class LendCar extends React.Component {
 							/>
 						</MuiPickersUtilsProvider>
 					</div>
-
-					{/*<input required id="pickup-add" placeholder="Enter Pickup Address" onChange={this.setPickAdd} />*/}
 					<SubmitButton type="submit" style={{ padding: "2% 1%", margin: "8% 2% 0% 2%" }}>Add Your Car</SubmitButton>
 				</form>
 			</>

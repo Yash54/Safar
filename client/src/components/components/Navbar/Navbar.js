@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Button } from '../../assets/Button/Button';
 import { Link, useHistory } from 'react-router-dom';
 import AuthService from "../../../services/auth";
+import { authHeader } from "../../../services/authHeader";
 import './Navbar.css';
 import styled from "styled-components";
+import axios from 'axios';
 import { GlobalState } from '../../context/index';
 import { Dialog, DialogContent } from '@material-ui/core';
 import SearchBar from '../Hero/SearchBar';
@@ -77,6 +79,28 @@ function Navbar() {
     }
 
     window.addEventListener('scroll', changeBackground);
+
+    const fetchUserProfile = () => {
+        axios.get("/user/profile", { headers: authHeader() }).then((res) => {
+            if (res.status === 200) {
+                console.log(res);
+                dispatch({
+                    type: "SET_USER_DETAILS",
+                    payload: {
+                        email: res.data.email,
+                        fullName: res.data.name,
+                        phoneNumber: res.data.phone_no,
+                        address: res.data.address,
+                        city: res.data.city,
+                        pincode: res.data.pincode,
+                    }
+                })
+                history.push("/user/profile");
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
     const handleChange = (e) => {
         setCity(e.target.value);
@@ -243,6 +267,7 @@ function Navbar() {
                                         className='nav-links-mobile'
                                         onClick={
                                             () => {
+                                                fetchUserProfile();
                                                 closeMobileMenu();
                                             }
                                         }
@@ -280,7 +305,7 @@ function Navbar() {
                                     button
                                     &&
                                     <>
-                                        <LoginButton onClick={() => {  }} ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;My Profile</LoginButton>
+                                        <LoginButton onClick={() => { fetchUserProfile() }} ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;My Profile</LoginButton>
                                         &nbsp; &nbsp;
                                         <LoginButton onClick={() => { AuthService.logout() }}><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;LogOut</LoginButton>
                                         

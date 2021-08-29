@@ -1,0 +1,25 @@
+#profile {
+  display: flex;
+  margin: 0 150px;
+
+  .search-repo {
+    width: 75%;
+  }
+}
+
+@media (max-width: 1050px) {
+  #profile {
+    margin: 0 75px;
+  }
+}
+
+@media (max-width: 900px) {
+  #profile {
+    margin: 0 20px;
+    .search-repo {
+      #filter-repo {
+        width: 80%;
+      }
+    }
+  }
+}
