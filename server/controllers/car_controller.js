@@ -1,8 +1,9 @@
 const cars = require("../models/car");
 const confirmedbookings = require("../models/confirmedBooking");
+const requestbookings = require("../models/requestBooking");
 const date = require("date-and-time");
 const user = require("../models/user");
-
+const dayjs = require("dayjs");
 
 const asyncForEach = async (array, callback) => {
     for (let index = 0; index < array.length; index++) {
@@ -179,3 +180,174 @@ module.exports.filter = async(req, res)=> {
     }
 };
   
+module.exports.requestbooking = async(req, res)=> {
+  try {
+    await requestbookings.find({}, async(err, rb)=> {
+      if (err) {
+        return res.status(400).json({ message: "Server error" });
+      }
+      var bookingcount = rb.length + 1;
+      var bookingid = "B" + bookingcount.toString();
+      const pattern = date.compile("YYYY-MM-DD");
+      var d1 = date.format(new Date(req.body.to_date), pattern);
+      var d2 = date.format(new Date(req.body.from_date), pattern);
+      const td = dayjs(req.body.to_date, "YYYY-MM-DD");
+      const fm = dayjs(req.body.from_date, "YYYY-MM-DD");
+      const days = td.diff(fm, "day");
+      const finalrent = days * req.body.rent;
+      const newrequestedbooking = new requestbookings({
+        bookingid: bookingid,
+        lender_email: req.body.lender_email,
+        borrower_email: req.email,
+        carid: req.body.carid,
+        from_date: d2,
+        to_date: d1,
+        rent: finalrent,
+        booking_status: -1, //-1: request pending, 1:request accepted, 0:request rejected
+      });
+      await newrequestedbooking.save(e=> {
+        if (e) {
+          console.log(`Error in processing request booking`);
+          return res
+            .status(404)
+            .json({ message: "Error in processing request booking" });
+        }
+        res
+          .status(200)
+          .json({ message: "Successfully processed booking request" });
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Error in catch block" });
+  }
+};
+
+module.exports.cancelconfirmedbooking = async(req, res)=> {
+  try {
+    console.log(req.body.bookingid);
+    await confirmedbookings.findOneAndUpdate(
+      { bookingid: req.body.bookingid },
+      { cancel: 1 }
+    );
+    
+    res.status(200).json({ message: "Successfully cancelled booking" });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Error in catch block" });
+  }
+};
+
+module.exports.acceptrequestbooking = async(req, res)=> {
+  try {
+    console.log(req.body);
+    const pattern = date.compile("YYYY-MM-DD");
+    var d1;
+    var d2;
+    const rb = await requestbookings.findOne({ bookingid: req.body.bookingid });
+    await requestbookings.findOneAndUpdate(
+      { bookingid: req.body.bookingid },
+      { booking_status: 1 }
+    );
+    d1 = date.format(new Date(rb.to_date), pattern);
+    d2 = date.format(new Date(rb.from_date), pattern);
+    const cb = new confirmedbookings({
+      bookingid: rb.bookingid,
+      lender_email: rb.lender_email,
+      borrower_email: rb.borrower_email,
+      carid: rb.carid,
+      from_date: rb.from_date,
+      to_date: rb.to_date,
+      rent: rb.rent,
+      trip_status: 0,
+      cancel: 0,
+    });
+    await cb.save();
+    const carss = await requestbookings.find({ carid: req.body.carid });
+    console.log(carss);
+    for (let index = 0; index < carss.length; index++) {
+      if (carss[index].booking_status == -1) {
+        var d3 = date.format(new Date(carss[index].to_date), pattern);
+        var d4 = date.format(new Date(carss[index].from_date), pattern);
+        if (
+          (d2 < d3 && d3 < d1) ||
+          (d2 < d4 && d4 < d1) ||
+          (d4 < d2 && d3 > d2)
+        ) {
+          await requestbookings.findOneAndUpdate(
+            { bookingid: carss[index].bookingid },
+            { booking_status: 0 }
+          );
+        }
+      }
+    }
+    return res.status(200).json({ message: "Booking request accepted" });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Error in catch block" });
+  }
+};
+
+module.exports.cancelrequestbooking = async(req, res)=> {
+  try {
+    await requestbookings.findOneAndUpdate(
+      { bookingid: req.body.bookingid },
+      { booking_status: 0 }
+    );
+    res.status(200).json({ message: "Successfully cancelled booking request" });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Error in catch block" });
+  }
+};
+
+module.exports.updateCarDetails = (req, res)=>{
+  try {
+    console.log(req.body);
+    cars.findOne({ carid: req.body.carid }, async(err, result)=> {
+      if (err || !result) {
+        console.log(err);
+        return res.status(400).json({ message: "server error" });
+      }
+      if (req.email != result.body.lender_email) {
+        return res
+          .status(200)
+          .json({ message: "Car does not belong to this user" });
+      }
+      var finalcity;
+      user.find({ email: req.email }, (err, user)=>{
+        if (err || !user) {
+          return res.status(400).json({ message: "Server Error" });
+        }
+        finalcity = user[0].city;
+      });
+      console.log(finalcity);
+      const pattern = date.compile("YYYY-MM-DD");
+      var tod = date.format(new Date(req.body.to), pattern);
+      var fromd = date.format(new Date(req.body.from), pattern);
+      result.pictures = req.body.croppedImage;
+      result.registration_no = req.body.registration;
+      result.rent = req.body.rent;
+      result.deposite = req.body.deposit;
+      result.company = req.body.company;
+      result.modl = req.body.model;
+      result.category = req.body.category;
+      result.fuel_type = req.body.fuel;
+      result.no_of_passengers = req.body.seats;
+      result.color = req.body.color;
+      result.engine_type = req.body.eng;
+      result.features = req.body.features;
+      result.to_date = tod;
+      result.from_date = fromd;
+      result.city = finalcity;
+      await result.save();
+      return res
+        .status(200)
+        .json({ message: "Car details updated successfully" });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Error in catch block" });
+  }
+};
+
