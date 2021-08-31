@@ -1,0 +1,15 @@
+.about-us{
+    width:100%;
+}
+
+.about-us-container{
+    width: 98%;
+    background-color: whitesmoke;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    box-shadow: -1px 1px 10px 1px rgba(0,0,0,0.3);
+    -webkit-box-shadow: -1px 1px 10px 1px rgba(0,0,0,0.3);
+    -moz-box-shadow: -1px 1px 10px 1px rgba(0,0,0,0.3);
+}

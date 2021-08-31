@@ -9,7 +9,7 @@ import { Authenticate } from "./components/pages/Auth/index.js";
 import { RentCar } from "./components/pages/RentCar/RentCar";
 import { Profile } from './components/pages/Profile/Profile';
 import LendCar from './components/components/LendACar/LendCar';
-
+import AboutUs from './components/pages/AboutUs/AboutUs';
 
 import { userReducer, initialUserState } from './components/reducer';
 import { GlobalState } from './components/context';
@@ -35,6 +35,7 @@ function App() {
                         <Route path='/rent' exact render={() => <RentCar />} />
 						<Route path='/user/profile' exact render={() => <Profile />} />
                         <Route path='/user/lendCar' exact render={() => <LendCar />} />
+                        <Route path='/aboutUs' exact render={() => <AboutUs />} />
                     </Switch>
                 </Router>
 		</GlobalState.Provider>
