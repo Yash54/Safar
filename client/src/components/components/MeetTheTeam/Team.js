@@ -16,7 +16,7 @@ function Team(){
                             <ul className="team-row">
                                 <TeamMember 
                                     name="Yash Patel" 
-                                    imgsrc="team-members/IMG_20210728_202315.jpg"
+                                    imgsrc="team-members/170761.jpg"
                                     position="Front-End Developer"
                                     github="https://github.com/Yash54"
                                     instagram="https://www.instagram.com/yashpatel.2145/"
@@ -25,7 +25,7 @@ function Team(){
                                 />
                                 <TeamMember 
                                     name="Krishil Patel" 
-                                    imgsrc="team-members/krishil1.jpg"
+                                    imgsrc="team-members/4564011.jpg"
                                     position="Back-End Developer"
                                     github="https://github.com/KRISHIL-cyber"
                                     instagram="https://www.instagram.com/krishil005/"
@@ -34,7 +34,7 @@ function Team(){
 
                                 <TeamMember 
                                     name="Luv Patel" 
-                                    imgsrc="team-members/V_AGENTS_587x900_Viper.png"
+                                    imgsrc="team-members/naruto-shippuuden-blood-uchiha-sasuke-wallpaper-preview.jpg"
                                     position="Front-End Developer"
                                     github="https://github.com/LuvPatel"
                                     instagram="https://www.instagram.com"

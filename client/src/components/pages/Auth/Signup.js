@@ -148,9 +148,6 @@ export function Signup(props) {
                         password : userInfo.password,
                     }
                 })
-                // history.push({
-                //     pathname: "/user/accountConfirmation",
-                // });
                 history.push("/")
             }
             else
@@ -182,11 +179,11 @@ export function Signup(props) {
                 <Input type="tel" placeholder="0123456789" pattern="[0-9]{10}" maxlength="10" onChange={handleChange} name="phoneNumber" required />
                 <Input placeholder="Address 1" onChange={handleChange} name="address1" required/>
                 <Input placeholder="Address 2" onChange={handleChange} name="address2" required/>
-                {/* <Input placeholder="City" onChange={handleChange} name="city" required/> */}
                 <div className="selectDiv" style={{ marginBottom: "2%", marginTop:"2%"}}>
                     <select required className="dropdown-inputs" name="city" id="city-selection" style={{border:"1px solid #aaaaac", color:"#aaaaac"}} onChange={handleChange}>
                         <option disabled selected style={{color:"#aaaaac"}}>City</option>
                         <option value="Ahmedabad" style={{color:"#000"}}>Ahemadabad</option>
+                        <option value="Vadodara" style={{color:"#000"}}>Vadodara</option>
                         <option value="Gandhinagar" style={{color:"#000"}}>Gandhinagar</option>
                         <option value="Rajkot" style={{color:"#000"}}>Rajkot</option>
                         <option value="Surat" style={{color:"#000"}}>Surat</option>

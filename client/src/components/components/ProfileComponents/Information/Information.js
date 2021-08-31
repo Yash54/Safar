@@ -200,7 +200,18 @@ export const Information = () => {
                             <Input type="text" placeholder="Email" value={userInfo.email} name="email" disabled />
                             <Input type="tel" placeholder="0123456789" value={userInfoUpdated.updatedPhoneNumber} pattern="[0-9]{10}" maxlength="10" onChange={handleChange} name="updatedPhoneNumber" required />
                             <Input placeholder="Address 1" onChange={handleChange} name="updatedAddress1" />
-                            <Input placeholder="City" value={userInfoUpdated.updatedCity} onChange={handleChange} name="updatedCity" />
+                            {/* <Input placeholder="City" value={userInfoUpdated.updatedCity} onChange={handleChange} name="updatedCity" /> */}
+                            <div className="selectDiv" style={{ marginBottom: "2%", marginTop:"2%"}}>
+                                <select required className="dropdown-inputs" name="city" id="city-selection" style={{border:"1px solid #aaaaac", color:"#aaaaac"}} value={userInfoUpdated.updatedCity} onChange={handleChange} name="updatedCity">
+                                    <option disabled selected style={{color:"#aaaaac"}}>City</option>
+                                    <option value="Ahmedabad" style={{color:"#000"}}>Ahemadabad</option>
+                                    <option value="Vadodara" style={{color:"#000"}}>Vadodara</option>
+                                    <option value="Gandhinagar" style={{color:"#000"}}>Gandhinagar</option>
+                                    <option value="Rajkot" style={{color:"#000"}}>Rajkot</option>
+                                    <option value="Surat" style={{color:"#000"}}>Surat</option>
+                                    <option value="Dahod" style={{color:"#000"}}>Dahod</option>
+                                </select>
+                            </div>
                             <Input placeholder="Pincode" value={userInfoUpdated.updatedPincode} onChange={handleChange} name="updatedPincode" />
                             <span style={{ display: "flex", flexDirection:"row", width:"100%", marginTop:"5%"}}>
                                 <SubmitButton onClick={(e) => { handleSubmit(e); }} style={{ width:"40%", margin:"0% 5%", padding:"2% 8%" }} > Edit Profile </SubmitButton>

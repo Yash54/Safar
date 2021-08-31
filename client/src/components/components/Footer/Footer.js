@@ -39,11 +39,10 @@ function Footer() {
                         <i className='fa fa-road' />
                         </Link>
                     </div>
-                    <small className='website-rights'>Safar © 2021</small>
+                    <medium className='website-rights'>Safar © 2021</medium>
                     <div>
                         <Link
                             to='/'
-                            target='_blank'
                             style={{color:"white"}}
                         >
                             Privacy
@@ -51,7 +50,6 @@ function Footer() {
                         &nbsp; &nbsp;
                         <Link
                             to='/'
-                            target='_blank'
                             style={{ color: "white" }}
                         >
                             Terms

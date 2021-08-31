@@ -23,6 +23,7 @@ export default function SearchBar(props) {
                     <select required className="dropdown-inputs" name="city" id="city-selection" style={{borderRadius:"10px"}} onChange={props.onChange}>
                         <option disabled selected>City</option>
                         <option value="Ahmedabad">Ahemadabad</option>
+                        <option value="Vadodara">Vadodara</option>
                         <option value="Gandhinagar">Gandhinagar</option>
                         <option value="Rajkot">Rajkot</option>
                         <option value="Surat">Surat</option>
