@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const MongoClient = require("mongodb").MongoClient;
-const uri = String(process.env.DB_URL);
+const uri = "mongodb+srv://tester:test007@rentsystem.tdjov.mongodb.net/RentingSystem?retryWrites=true&w=majority";
 mongoose.connect(uri, {
   useCreateIndex: true,
   useNewUrlParser: true,

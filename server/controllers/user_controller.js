@@ -8,6 +8,7 @@ const cryptoRandomString = require("crypto-random-string");
 const Car = require("../models/car");
 const ConfirmedBooking = require("../models/confirmedBooking");
 const RequestedBooking = require("../models/requestBooking");
+const Otp = require("../models/otp");
 
 const asyncForEach = async (array, callback) => {
     for (let index = 0; index < array.length; index++) {

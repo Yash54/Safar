@@ -133,7 +133,7 @@ export function Signup(props) {
             city:userInfo.city,
         }
 
-        axios.post("/user/create", payload).then((res) => {
+        axios.post("/user/userverifymail", payload).then((res) => {
             if (res.status === 200)
             {
                 dispatch({
@@ -148,7 +148,7 @@ export function Signup(props) {
                         password : userInfo.password,
                     }
                 })
-                history.push("/")
+                history.push("/user/accountConfirmation")
             }
             else
             {
