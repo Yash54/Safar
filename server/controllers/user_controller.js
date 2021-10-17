@@ -1,7 +1,10 @@
+require("dotenv").config();
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const date = require("date-and-time");
 const bcrypt = require("bcryptjs");
+const emailservice = require("../config/nodemailer");
+const cryptoRandomString = require("crypto-random-string");
 const Car = require("../models/car");
 const ConfirmedBooking = require("../models/confirmedBooking");
 const RequestedBooking = require("../models/requestBooking");
@@ -265,6 +268,126 @@ module.exports.updateprofile =(req, res)=>{
       return res
         .status(200)
         .json({ message: "User profile updated successfully" });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Error in catch block" });
+  }
+};
+
+
+module.exports.userverifymail = async(req, res)=>{
+  try {
+    User.findOne({ email: req.body.email }, async(err, user)=>{
+      if (user) {
+        console.log(`User already exists`);
+        return res.status(404).json({ message: "User already exists" });
+      }
+      Otp.deleteMany({ email: req.body.email }, async(err)=>{
+        if (err) {
+          console.log(err);
+          return res.status(404).json({ message: "No user" });
+        }
+      });
+      const secretCode = cryptoRandomString({
+        length: 6,
+      });
+      const newCode = new Otp({
+        code: secretCode,
+        email: req.body.email,
+      });
+      newCode.save();
+      await emailservice.sendEmail(
+        req.body.email,
+        secretCode,
+        (err, result) => {
+          if (err) {
+            console.error({ err });
+          }
+        }
+      );
+      res.status(200).json({ message: secretCode });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Error in catch block" });
+  }
+};
+
+
+module.exports.resetpassmail = async(req, res)=>{
+  try {
+    console.log(req.body);
+    User.findOne({ email: req.body.email }, async(err, user)=> {
+      if (err || !user) {
+        res.status(404).json({ message: "Please enter valid email" });
+      }
+      Otp.deleteMany({ email: req.body.email }, async(err)=> {
+        if (err) {
+          console.log(err);
+          return res.status(404).json({ message: "No user" });
+        }
+      });
+      const secretCode = cryptoRandomString({
+        length: 6,
+      });
+      const newCode = new Otp({
+        code: secretCode,
+        email: req.body.email,
+      });
+      newCode.save();
+      await emailservice.sendEmail(
+        req.body.email,
+        secretCode,
+        (err, result) => {
+          if (err) {
+            console.error({ err });
+          }
+        }
+      );
+      res.status(200).json({ message: secretCode });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Error in catch block" });
+  }
+};
+
+
+module.exports.verifyotp = async(req, res)=>{
+  try {
+    Otp.findOne({ email: req.body.email }, async(err, otp)=>{
+      if (err || !otp) {
+        return res.status(404).json({ message: "Error in finding user" });
+      }
+      if (req.body.otp.otp != otp.code) {
+        console.log(req.body.email);
+        return res.status(400).json({ message: "wrong otp" });
+      }
+      res.status(200).json({ message: "OTP verified" });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status.json({ message: "Error in catch block" });
+  }
+};
+
+
+module.exports.setnewpass = async(req, res)=>{
+  try {
+    User.findOne({ email: req.body.email }, async(err, user)=>{
+      if (err || !user) {
+        return res.status(400).json({ message: "Please enter valid email" });
+      }
+      const salt = await bcrypt.genSalt(10);
+      const hashpwd = await bcrypt.hash(req.body.password, salt);
+      user.password = hashpwd;
+      user.save((err)=>{
+        if (err) {
+          res.status(400).json({ message: "Error in updating the password" });
+        }
+      });
+      res.status(200).json({ message: "Password changed successfully" });
     });
   } catch (err) {
     console.log(err);
