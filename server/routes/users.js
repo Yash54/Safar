@@ -11,5 +11,8 @@ router.get("/getrentedcar", verifytoken.verifyToken, usercontroller.getrentedcar
 router.get("/getlendedcar", verifytoken.verifyToken, usercontroller.getlendedcar);
 router.get("/getrequestedcar", verifytoken.verifyToken, usercontroller.getrequestedcar);
 router.post("/updateprofile", verifytoken.verifyToken, usercontroller.updateprofile);
-
+router.post("/userverifymail", usercontroller.userverifymail);
+router.post("/resetpassmail", usercontroller.resetpassmail);
+router.post("/setnewpass", usercontroller.setnewpass);
+router.post("/verifyotp", usercontroller.verifyotp);
 module.exports = router;
